@@ -1,7 +1,7 @@
 ## Implementasi DevSecOps aplikasi e-commerce 
 Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana
 
-### Fase belajar
+### Tahap belajar
 | Proses | Platform |
 | -------- | -------- |
 | 1. Membuat VM | Googgle Cloud Platform |
@@ -14,12 +14,12 @@ Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana
 | 8. Deployment | Kubernetes, ArgoCD, Helm | 
 
 
-### Fase 1: Membuat VM
+### Tahap 1: Membuat VM
 
 - Provision an EC2 instance on AWS with Ubuntu 22.04.
 - Connect to the instance using SSH.
 
-### Step 2: Clone repo
+### Tahap 2: Clone repo
 
 - Update all the packages and then clone the code.
 - Clone your application's code repository onto the EC2 instance:
@@ -29,6 +29,8 @@ Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana
     ```
 
 - Akses username: admin | password: password123
+
+### Tahap 3: Mencoba aplikasi
 
 **Step 3: Install Docker and Run the App Using a Container:**
 
