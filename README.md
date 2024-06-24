@@ -16,8 +16,9 @@ Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana
 
 ### Tahap 1: Membuat VM
 
-- Provision an EC2 instance on AWS with Ubuntu 22.04.
-- Connect to the instance using SSH.
+- Membuat sebuah Compute Enginine pada GCP
+- Spesifikasi: e2-standard-2, boot disk 25GB, OS Ubuntu 24.04 LTS 
+- Lakukan koneksi SSH ke VM
 
 ### Tahap 2: Clone repo
 
