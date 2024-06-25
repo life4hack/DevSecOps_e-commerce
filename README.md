@@ -85,22 +85,16 @@ Hasil scan Image python:3.12-alpine (apline linux base)
 Terlihat perbedaan vulnerability kedua Image, alpine linux jauh lebih sedikit kerentanan (bahkan nol)
 
 ### Tahap 6: SonarQube dan Jenkins   
-- Install SonarQube via docker run.
-    
-sonarqube
+#### **6.1 Install SonarQube via docker run**
+
 ```
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 ```
 
-Akses : 
+Akses melalui http://{IP_Publik}:9000 (default username & password = admin)
 
-publicIP:9000 (default username & password = admin)
 
-**Integrate SonarQube and Configure:**
-- Integrate SonarQube with your CI/CD pipeline.
-- Configure SonarQube to analyze code for quality and security issues.
- 
-### **Jenkins Setup**
+#### **6.2 Jenkins Setup**
 
 1. **Install Jenkins:**
     - Install Jenkins pada VM instance untuk deployment:
@@ -130,39 +124,33 @@ publicIP:9000 (default username & password = admin)
     
     - Akses Jenkins melalui browser http://{IP_Publik}:8080
         
-2. **Install Necessary Plugins in Jenkins:**
+2. **Install Plugins yang dibituhkan di Jenkins:**
 
-    Goto Manage Jenkins →Plugins → Available Plugins →
+    Manage Jenkins → Plugins → Available Plugins → Install plugins berikut:
 
-    Install below plugins
+    1 Eclipse Temurin Installer 
 
-    1 Eclipse Temurin Installer (Install without restart)
-
-    2 SonarQube Scanner (Install without restart)
+    2 SonarQube Scanner 
 
     3 Pyenv Pipeline
 
 
-### **Configure Java and Nodejs in Global Tool Configuration**
+#### **Konfigurasi Java pada Global Tool Configuration**
 
-Goto Manage Jenkins → Tools → Install jdk-17 (17.0.8+7) 
+Manage Jenkins → Tools → Install jdk-17 (17.0.8+7) 
 
 
-### SonarQube
+#### 6.3 SonarQube
 
-1. Create the token
-2. Goto Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. It should look like this
-3. After adding sonar token
+1. Buat secret admin token melalui SonarQube
+2. Kembali ke  Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. 
+3. Tambahkan sonar-token
 4. Click on Apply and Save
 
-**The Configure System option** is used in Jenkins to configure different server
+| Silakan mengunjungi link referensi #3 dan #4 untuk instruksi lebih jelas
 
-**Global Tool Configuration** is used to configure different tools that we install using Plugins
-
-We will install a sonar scanner in the tools.
-
-**Configure CI/CD Pipeline in Jenkins:**
-- Create a CI/CD pipeline in Jenkins to automate your application deployment.
+**6.4 Configure CI/CD Pipeline in Jenkins:**
+- Membuat pipeline Jenkins untuk clone repo dan analisa SonarQube.
 
 ```groovy
 pipeline {
@@ -181,7 +169,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'dev', credentialsId: 'GitHub-token', url: 'https://github.com/life4hack/DevSecOps_e-commerce.git'
+                git branch: 'main', url: 'https://github.com/life4hack/DevSecOps_e-commerce.git'
             }
         }
         stage("Sonarqube Analysis") {
@@ -195,7 +183,7 @@ pipeline {
         stage("quality gate") {
             steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
             }
         }
