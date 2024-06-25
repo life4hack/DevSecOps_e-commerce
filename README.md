@@ -1,5 +1,5 @@
 ## Implementasi DevSecOps aplikasi e-commerce 
-Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana
+Project pembelajaran implementasi DevSecOps dalam aplikasi e-commerce sederhana berbasis Django menggunakan tools security Trivy dan SonarQube
 
 ### Tahap belajar
 | Proses | Platform |
@@ -76,6 +76,14 @@ sudo apt-get install trivy
 ```
 trivy image <ImageID>
 ```
+Hasil scan Image python:3.12 (debian base)
+<img width="709" alt="Screenshot 2024-06-24 at 17 00 46" src="https://github.com/life4hack/DevSecOps_e-commerce/assets/70374232/9dc000b7-e8a6-4a7b-8bc4-5fb0cecae153">
+
+Hasil scan Image python:3.12-alpine (apline linux base)
+<img width="837" alt="Screenshot 2024-06-24 at 19 57 21" src="https://github.com/life4hack/DevSecOps_e-commerce/assets/70374232/76956c6b-cf67-41a2-bdc1-7ef6dedbef89">
+
+Terlihat perbedaan vulnerability kedua Image, alpine linux jauh lebih sedikit kerentanan (bahkan nol)
+
 ### Tahap 6: SonarQube dan Jenkins   
 - Install SonarQube via docker run.
     
@@ -92,7 +100,7 @@ publicIP:9000 (default username & password = admin)
 - Integrate SonarQube with your CI/CD pipeline.
 - Configure SonarQube to analyze code for quality and security issues.
  
-### **CI/CD Setup**
+### **Jenkins Setup**
 
 1. **Install Jenkins:**
     - Install Jenkins pada VM instance untuk deployment:
@@ -201,6 +209,10 @@ pipeline {
     }
 }
 ```
+
+Hasil scan source code dengan tools SonarQube
+
+<img width="1108" alt="Screenshot 2024-06-24 at 23 48 01" src="https://github.com/life4hack/DevSecOps_e-commerce/assets/70374232/5fe86c6f-8214-4b05-8194-70024b260b39">
 
 
 
